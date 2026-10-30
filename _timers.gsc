@@ -4,21 +4,6 @@
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\gametypes_zm\_hud_util;
 
-safe_replacefunc(path, name, replacement) {
-  func = getfunction(path, name);
-
-  if (!isdefined(func))
-    return false;
-
-  if (!isdefined(level.old_funcs))
-    level.old_funcs = [];
-
-  level.old_funcs[name] = func;
-  replacefunc(func, replacement);
-
-  return true;
-}
-
 set_dvar_default(name, value) {
   if (getdvar(name) != "")
     return;
