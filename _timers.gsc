@@ -1,4 +1,3 @@
-
 #include maps\mp\_utility;
 #include common_scripts\utility;
 #include maps\mp\zombies\_zm_utility;
@@ -128,17 +127,15 @@ create_timer_hud() {
   }
 
   if (level.hud_split_enabled && isdefined(level.hud_split_hud)) {
-    if (level.hud_split_round > 0) {
+    if (level.hud_split_round > 0)
       level.hud_split_hud set_string_text("R" + level.hud_split_round + " - " + format_timer_time(level.hud_split_time));
-    } else {
+    else
       level.hud_split_hud set_string_text("--:--");
-    }
   }
 }
 
 create_timer_element(y, label) {
   hud = createServerFontString("objective", 1.5);
-
   hud setpoint("TOPLEFT", "TOPLEFT", -55, y);
 
   hud.label = istring(label);
@@ -156,11 +153,9 @@ format_timer_time(milliseconds) {
     milliseconds = 0;
 
   total_seconds = int(milliseconds / 1000);
-
   hours = int(total_seconds / 3600);
   minutes = int(total_seconds / 60) % 60;
   seconds = total_seconds % 60;
-
   seconds_text = "" + seconds;
 
   if (seconds < 10)
@@ -187,30 +182,4 @@ set_string_text(text) {
 
   self settextunlimited(text);
   self.text = text;
-}
-
-set_value_text(value) {
-  if (!isdefined(value))
-    value = 0;
-
-  text = "" + value;
-
-  if (isdefined(self.text) && self.text == text)
-    return;
-
-  self settextunlimited(text);
-  self.text = text;
-}
-
-destroy_element() {
-  if (isdefined(self.frame))
-    self.frame destroy();
-
-  if (isdefined(self.bar))
-    self.bar destroy();
-
-  if (isdefined(self.barframe))
-    self.barframe destroy();
-
-  self destroy();
 }
